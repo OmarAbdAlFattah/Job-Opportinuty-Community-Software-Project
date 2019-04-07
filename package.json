@@ -1,0 +1,27 @@
+{
+  "name": "job-op",
+  "version": "1.0.0",
+  "description": "Community component for job opportunity software project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OmarAbdAlFattah/Job-Opportinuty-Community-Software-Project.git"
+  },
+  "keywords": [
+    "community",
+    "SoftwareProject"
+  ],
+  "author": "Omar Mokhtar, Omar AbdelFattah, AhmedBassem",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OmarAbdAlFattah/Job-Opportinuty-Community-Software-Project/issues"
+  },
+  "homepage": "https://github.com/OmarAbdAlFattah/Job-Opportinuty-Community-Software-Project#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  }
+}
