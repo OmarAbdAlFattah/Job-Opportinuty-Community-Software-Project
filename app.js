@@ -5,33 +5,50 @@ const mysql = require('mysql');
 const Port = process.env.port || 3000;
 
 const db = mysql.createConnection({
-    host: 'root',
-    user: 'localhost',
+    host: 'localhost',
+    user: 'root',
     password: 'hostpassword',
-    database: 'my_db',
+    database: 'nodesql',
     port: '3000'
 });
 
-db.connect((err) => {
-    if (err) throw err;
-    console.log("db connected");
-});
+function handleDissconnection() {
+
+
+    db.connect((err) => {
+        if (err) throw err;
+        console.log("db connected");
+        setTimeout(handleDisconnect, 2000);
+    });
+
+    db.on('error', (err) => {
+        console.log('db error ', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+            handleDisconnect(); // lost due to either server restart, or a
+        } else { // connnection idle timeout (the wait_timeout
+            throw err; // server variable configures this)
+        }
+    });
+}
+handleDissconnection();
 
 const app = express();
 
 app.get('/profile', (req, res) => {
 
-    console.log(result);
-    res.sendFile(path.join(__dirname + '/profile.html'));
-    let sql = "CREATE DATABASE my_db";
+    res.sendFile(path.join(__dirname + '/index.html'));
+    let sql = "CREATE DATABASE nodesql";
+    //let sql = "INSERT INTO post VALUES (1, 1, \"this is my first post\")";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        console.log(result);
-        res.send("database connected succefully...");
-    })
+        console.log(result)ك
+    });
+    //    res.send("database connected succefully...");
+    // res.end();
 });
 
 
 //app.use(express.json());
+
 
 app.listen(Port, () => console.log(`listening on port ${Port}...`));
